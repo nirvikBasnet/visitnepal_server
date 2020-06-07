@@ -24,22 +24,18 @@ router.post('/signup',async (req,res)=>{
         const token = jwt.sign({userId:user._id},jwtkey) //id from mongodb
         res.send({token:token})
 
-        
+
 
 
         
     }catch(err){
-        res.status(422).send(err.message)
+       return res.status(422).send(err.message)
          
     }
 
     
     res.send('hello')
 })
-
-
-
-
 
 
 module.exports = router

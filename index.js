@@ -9,6 +9,7 @@ const {mongoUrl} = require('./keys')
 
 require('./models/User');
 
+
 //all routes goes below
 
 const authRoutes = require('./routes/authRoutes')
