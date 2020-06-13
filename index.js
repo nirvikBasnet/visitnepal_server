@@ -13,8 +13,11 @@ require('./models/User');
 //all routes goes below
 
 const authRoutes = require('./routes/authRoutes')
+const medsRouter = require('./routes/meds');
 const requireToken = require('./middleware/requireToken')
+
 app.use(bodyParser.json())
+app.use('/meds', medsRouter);
 app.use(authRoutes)
 
 
@@ -39,7 +42,7 @@ mongoose.connection.on('error',()=>{
 
 
 app.get('/',requireToken,(req,res)=>{
-    res.send("Your email is "+ req.user.email)
+    res.send({email: req.user.email})
 })
 
 app.listen(PORT,()=>{

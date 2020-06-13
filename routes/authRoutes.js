@@ -22,7 +22,7 @@ router.post('/signup',async (req,res)=>{
         await user.save();
 
         const token = jwt.sign({userId:user._id},jwtkey) //id from mongodb
-        res.send({token:token})
+        res.send({token})
 
 
 
@@ -34,7 +34,35 @@ router.post('/signup',async (req,res)=>{
     }
 
     
-    res.send('hello')
+})
+router.route('/userlist').get((req, res) => {
+    User.find()
+      .then(user => res.json(user))
+      .catch(err => res.status(400).json('Error: ' + err));
+  });
+
+//signin route
+
+router.post('/signin',async(req,res)=>{
+    const {email,password} = req.body;
+
+    if(!email || !password){
+        return res.status(422).send({error : "Must provide email or password."})
+    }
+    const user =await User.findOne({email}) //it might take some time to find email.
+    if(!user) {
+        return res.status(422).send({error : "User not Found !!"})
+    }
+    try{
+    await user.comparePassword(password);
+    const token = jwt.sign({userId:user._id},jwtkey) //id from mongodb
+    res.send({token})
+    
+    }catch{
+        return res.status(422).send({error : "User not Found !!"})
+
+    }
+
 })
 
 
