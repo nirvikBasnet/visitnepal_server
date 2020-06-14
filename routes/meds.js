@@ -7,6 +7,8 @@ router.route('/').get((req, res) => {
     .catch(err => res.status(400).json('Error: ' + err));
 });
 
+
+
 router.route('/add').post((req, res) => {
   const username = req.body.username;
   const medsname = req.body.medsname;
@@ -32,6 +34,7 @@ router.route('/:id').get((req, res) => {
     .then(meds => res.json(meds))
     .catch(err => res.status(400).json('Error: ' + err));
 });
+
 
 router.route('/:id').delete((req, res) => {
   Meds.findByIdAndDelete(req.params.id)
