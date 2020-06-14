@@ -9,12 +9,14 @@ router.route('/').get((req, res) => {
 
 router.route('/add').post((req, res) => {
   const username = req.body.username;
+  const medsname = req.body.medsname;
   const description = req.body.description;
   const duration = Number(req.body.duration);
   
 
   const newMeds = new Meds({
     username,
+    medsname,
     description,
     duration,
     
@@ -41,6 +43,7 @@ router.route('/update/:id').post((req, res) => {
   Meds.findById(req.params.id)
     .then(meds => {
       meds.username = req.body.username;
+      meds.medsname = req.body.medsname;
       meds.description = req.body.description;
       meds.duration = Number(req.body.duration);
     
