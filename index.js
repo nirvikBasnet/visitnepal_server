@@ -13,11 +13,11 @@ require('./models/User');
 //all routes goes below
 
 const authRoutes = require('./routes/authRoutes')
-const medsRouter = require('./routes/meds');
+
 const requireToken = require('./middleware/requireToken')
 
 app.use(bodyParser.json())
-app.use('/meds', medsRouter);
+
 app.use(authRoutes)
 
 

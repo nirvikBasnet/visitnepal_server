@@ -20,7 +20,7 @@ userSchema.pre('save',function(next){
     if(!user.isModified('password')){
         return next();
     }
-    //using salt
+    //using salt for salting password
     bcrypt.genSalt(10,(err,salt)=>
     {
         if(err){
